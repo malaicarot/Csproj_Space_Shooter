@@ -11,11 +11,6 @@ public class Health_Enemy : MonoBehaviour
 
     void Start()
     {
-        // if (healthBar == null)
-        // {
-        //     Debug.LogError("HealthBar chưa được gán trong Inspector!");
-        //     return;
-        // }
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 

@@ -71,8 +71,6 @@ public class ScoreManage : MonoBehaviour
         yield return new WaitForSeconds(1f);
         wavePanel.SetActive(false);
 
-
-
     }
 
     public void OnReload()

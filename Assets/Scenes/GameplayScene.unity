@@ -622,11 +622,12 @@ MonoBehaviour:
   - {fileID: 1732553661843294018, guid: 8c2eda7919c1f7a4ea4305083f015936, type: 3}
   enemyLazerPrefabs: {fileID: 5730402707075596266, guid: 4bd6e3f1fd423cd4ebdecbb98ae151ed, type: 3}
   Obstacle: {fileID: 2851183688339490305, guid: 7896585b1245aa14d95e6cce38e674bb, type: 3}
-  timer: 0
   hazardCount: 5
   spwawnWait: 4
   startWait: 4
   waitWave: 2
+  EnemFactory: {fileID: 1608109462}
+  wave: 2
   spacing: 5
 --- !u!4 &180565555
 Transform:
@@ -1864,6 +1865,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607196436}
   m_CullTransparentMesh: 1
+--- !u!1 &1608109461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1608109463}
+  - component: {fileID: 1608109462}
+  m_Layer: 0
+  m_Name: EnemyFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1608109462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608109461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2180ae45627eee9488527a5e866b25ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Obstacle: {fileID: 2851183688339490305, guid: 7896585b1245aa14d95e6cce38e674bb, type: 3}
+  AlienShip:
+  - {fileID: 1732553661843294018, guid: ef572a3a5277d054192a086c8f1d5dd4, type: 3}
+  - {fileID: 4941647879483470518, guid: 0c7b659d70775244a80218c7eaa10254, type: 3}
+  - {fileID: 2452317365111522900, guid: bf9016f1eae66fc488be11acaa43c0ea, type: 3}
+  BossShip: {fileID: 1732553661843294018, guid: 8c2eda7919c1f7a4ea4305083f015936, type: 3}
+--- !u!4 &1608109463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608109461}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.6725426, y: -0.12790447, z: -0.057549745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717437649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,3 +2847,4 @@ SceneRoots:
   - {fileID: 1897129301}
   - {fileID: 1978466561}
   - {fileID: 613507466}
+  - {fileID: 1608109463}

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy_Spawn : MonoBehaviour
 {
-    // [SerializeField] private GameObject enemyPrefabs;
 
     [SerializeField] private List<GameObject> enemyPrefabs;
 
@@ -26,7 +25,9 @@ public class Enemy_Spawn : MonoBehaviour
     [SerializeField] private float startWait = 1f; // Thoi gian cho khi bat dau game
     [SerializeField] private float waitWave = 3f; // thoi gian doi giua cac wave
 
-    private int wave = 3; // So luong wave trong game
+    [SerializeField] EnemyFactory EnemFactory;
+
+    [SerializeField] private int wave = 3; // So luong wave trong game
     private int waveCount = 1;
 
     private int enemyHorizontal = 0;
@@ -44,67 +45,40 @@ public class Enemy_Spawn : MonoBehaviour
     {
         scoreManager = FindObjectOfType<ScoreManage>();
         powerUp_Items = FindObjectOfType<PowerUp_Spawner>();
-
         StartCoroutine(EnemySpawner());
-        // BossSpawner();
     }
-
 
 
     void Update()
     {
         ListEnemyExits.RemoveAll(enemy => enemy == null);
 
-    
-
     }
 
-    public void Spawner(GameObject enemy)
+    public void Spawner(EnemyType enemyType)
     {
+        Vector3 enemySpawner;
         float randomX = Random.Range(-8.2f, 8.2f);
-
-        Vector3 enemySpawner = new Vector3(randomX, 8f, 0f);
-
-        Instantiate(enemy, enemySpawner, Quaternion.identity);
-        ListEnemyExits.Add(enemy);
-    }
-
-    public void SpawnerHorizontal(GameObject enemy)
-    {
-        for (float i = -8.2f; i < 8.2f; i++)
+        if (enemyType == EnemyType.BossShip)
         {
-            Vector3 enemySpawner = new Vector3(i * spacing, 4.8f, 0f);
+            enemySpawner = new Vector3(0f, 8f, 0f);
+        }
+        else if (enemyType == EnemyType.AlieShipHorizontal)
+        {
+            enemySpawner = new Vector3(spacing, 4.8f, 0f);
+        }
+        else
+        {
+            enemySpawner = new Vector3(randomX, 8f, 0f);
+        }
 
-            Instantiate(enemy, enemySpawner, Quaternion.identity);
+        GameObject enemy = EnemFactory.CreateEnemy(enemyType, enemySpawner);
+
+        if (enemyType != EnemyType.BossShip)
+        {
             ListEnemyExits.Add(enemy);
-
         }
     }
-
-    public void SpawnerHighSpeed(GameObject enemy)
-    {
-
-
-
-    }
-
-    void BossSpawner()
-    {
-        Vector3 enemySpawner = new Vector3(0f, 8f, 0f);
-        GameObject boss = Instantiate(enemyPrefabs[3], enemySpawner, Quaternion.identity);
-
-
-        HealthBar healthBar = boss.GetComponentInChildren<HealthBar>();
-
-
-        boss.GetComponent<Health_Enemy>().healthBar = healthBar;
-
-        // healthBar.transform.position = transform.position;
-        // ListEnemyExits.Add(enemy);
-
-    }
-
-
     IEnumerator EnemySpawner()
     {
         if (ListEnemyExits.Count < maxEnemy)
@@ -116,20 +90,21 @@ public class Enemy_Spawn : MonoBehaviour
             yield return new WaitForSeconds(2);
             for (int i = 1; i <= hazardCount; i++)
             {
-                Spawner(enemyPrefabs[0]);
+                Spawner(EnemyType.AlieShip);
                 powerUp_Items.ItemDropRate();
                 if (waveCount >= 2)
                 {
-                    Spawner(Obstacle);
+                    Spawner(EnemyType.Obstacle);
                     for (int j = 0; j < enemyHorizontal; j++)
                     {
-                        SpawnerHorizontal(enemyPrefabs[typeEnemy]);
+                        Spawner(EnemyType.AlieShipHorizontal);
                     }
                 }
                 if (waveCount == wave && i == hazardCount)
                 {
-                    BossSpawner();
-                    for(int k = 0; k <= bossItem; k++){
+                    Spawner(EnemyType.BossShip);
+                    for (int k = 0; k <= bossItem; k++)
+                    {
                         powerUp_Items.ItemDropRate();
                         yield return new WaitForSeconds(spawnItems);
                     }
@@ -145,7 +120,6 @@ public class Enemy_Spawn : MonoBehaviour
             spacing--;
             yield return new WaitForSeconds(waitWave);
         }
-        // scoreManager.GameOver();
     }
 }
 

@@ -35,8 +35,6 @@ public class Air_Shooting : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //    AudioSource audioSource = other.GetComponent<AudioSource>();
-        //     audioSource.Play();
 
         AirMover player = other.gameObject.GetComponent<AirMover>();
         Health_Enemy boss = other.gameObject.GetComponent<Health_Enemy>();
@@ -50,9 +48,7 @@ public class Air_Shooting : MonoBehaviour
             }
             else if (other.CompareTag("Obstacle"))
             {
-
                 DestroyEnemy(other.gameObject);
-
             }
             else if (other.CompareTag("Boss"))
             {
