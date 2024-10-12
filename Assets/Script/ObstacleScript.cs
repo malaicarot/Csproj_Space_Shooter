@@ -6,10 +6,10 @@ public class ObstacleScript : MonoBehaviour, IEnemy
 {
 
     [SerializeField] private float _moveSpeed;
-
     [SerializeField] private int _damage;
+    [SerializeField] private int _health;
 
-
+    public int health {get => _health; set => _health = value;}
     public int damage { get => _damage; set => _damage = value; }
     public float moveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
 
@@ -25,7 +25,7 @@ public class ObstacleScript : MonoBehaviour, IEnemy
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
 
 

@@ -6,10 +6,12 @@ public class BossScript : MonoBehaviour, IEnemy
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;
+    [SerializeField] private int _health;
 
-
+    public int health {get => _health; set => _health = value;}
     public int damage { get => _damage; set => _damage = value; }
     public float moveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
+
     float moveDistance = 5.3f;
     float descendDistance = 6.13f;
     float moveDownSpeed = 5f;
@@ -65,7 +67,7 @@ public class BossScript : MonoBehaviour, IEnemy
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
 
     }

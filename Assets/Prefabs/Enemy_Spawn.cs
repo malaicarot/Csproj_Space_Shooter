@@ -63,7 +63,7 @@ public class Enemy_Spawn : MonoBehaviour
         {
             enemySpawner = new Vector3(0f, 8f, 0f);
         }
-        else if (enemyType == EnemyType.AlieShipHorizontal)
+        else if (enemyType == EnemyType.AlienShipHorizontal)
         {
             enemySpawner = new Vector3(spacing, 4.8f, 0f);
         }
@@ -86,18 +86,19 @@ public class Enemy_Spawn : MonoBehaviour
         while (waveCount <= wave)
         {
             StartCoroutine(scoreManager.WavePanel(waveCount));
-            int typeEnemy = Random.Range(1, 2);
             yield return new WaitForSeconds(2);
             for (int i = 1; i <= hazardCount; i++)
             {
-                Spawner(EnemyType.AlieShip);
+                // Spawner(EnemyType.AlienShip);
+                // Spawner(EnemyType.AlienSelfDestruct);
+                Spawner(EnemyType.AlienTurnBack);
                 powerUp_Items.ItemDropRate();
                 if (waveCount >= 2)
                 {
                     Spawner(EnemyType.Obstacle);
                     for (int j = 0; j < enemyHorizontal; j++)
                     {
-                        Spawner(EnemyType.AlieShipHorizontal);
+                        Spawner(EnemyType.AlienShipHorizontal);
                     }
                 }
                 if (waveCount == wave && i == hazardCount)

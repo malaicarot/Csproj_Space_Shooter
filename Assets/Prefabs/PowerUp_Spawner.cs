@@ -19,7 +19,6 @@ public class PowerUp_Spawner : MonoBehaviour
     }
 
     public void ItemDropRate(){
-        Debug.Log(rateDrop);
         int rate = Random.Range(rateDrop, 100);
         if(rate % 2 == 0){
             ItemSpawner();

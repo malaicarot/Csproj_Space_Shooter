@@ -9,7 +9,6 @@ public class Air_Shooting : MonoBehaviour
 
     [SerializeField] GameObject ExplodePrefabs;
 
-    string parentName;
 
     public string ParentName { get; set; }
 
@@ -18,13 +17,9 @@ public class Air_Shooting : MonoBehaviour
     private ScoreManage scoreManager;
 
 
-    // public int obstacleEndurance = 0;
-
-
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManage>();
-
     }
 
     void Update()
@@ -78,7 +73,8 @@ public class Air_Shooting : MonoBehaviour
 
     void DestroyEnemy(GameObject other)
     {
-        Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
+        GameObject exploder = Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
+        exploder.transform.localScale = other.gameObject.transform.localScale * 4;
         Destroy(other.gameObject);
         Destroy(gameObject);
 

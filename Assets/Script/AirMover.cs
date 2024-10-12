@@ -84,13 +84,14 @@ public class AirMover : MonoBehaviour
 
         
 
-        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle") || other.CompareTag("Boss"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle") || other.CompareTag("Boss") || other.CompareTag("Exploder"))
         {
             if (gameObject.CompareTag("Player"))
             {
                 takeDamage(100);
                 _ScoreManager.GameOver();
                 Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
+                Debug.Log(other.gameObject);
                 Destroy(gameObject);
             }
         }
