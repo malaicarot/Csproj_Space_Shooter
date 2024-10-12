@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class Enemy_Spawn : MonoBehaviour
 {
-
-    [SerializeField] private List<GameObject> enemyPrefabs;
-
     [SerializeField] private GameObject enemyLazerPrefabs;
-
     [SerializeField] private GameObject Obstacle;
 
 
     private List<GameObject> ListEnemyExits = new List<GameObject>();
-
-
-
     private ScoreManage scoreManager;
 
     private PowerUp_Spawner powerUp_Items;
@@ -89,13 +82,19 @@ public class Enemy_Spawn : MonoBehaviour
             yield return new WaitForSeconds(2);
             for (int i = 1; i <= hazardCount; i++)
             {
-                // Spawner(EnemyType.AlienShip);
-                // Spawner(EnemyType.AlienSelfDestruct);
-                Spawner(EnemyType.AlienTurnBack);
+                if(waveCount <= 1){
+                    Spawner(EnemyType.AlienShip);
+
+                }
                 powerUp_Items.ItemDropRate();
                 if (waveCount >= 2)
                 {
+                    Spawner(EnemyType.AlienTurnBack);
                     Spawner(EnemyType.Obstacle);
+                    if(waveCount >= 3){
+                        Spawner(EnemyType.AlienSelfDestruct);
+
+                    }
                     for (int j = 0; j < enemyHorizontal; j++)
                     {
                         Spawner(EnemyType.AlienShipHorizontal);
