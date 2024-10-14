@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Air_Shooting : MonoBehaviour
+
+[RequireComponent(typeof(PooledObject))]
+public class Air_Shooting : PooledObject
 {
     [SerializeField] private float speed = 7f;
 
@@ -82,8 +84,8 @@ public class Air_Shooting : MonoBehaviour
         GameObject exploder = Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
         exploder.transform.localScale = other.gameObject.transform.localScale * 4;
         Destroy(other.gameObject);
-        // Destroy(gameObject);
-        BulletPool.SingleTonPulletPool.ReturnBullet(gameObject);
+        // BulletPool.SingleTonPulletPool.ReturnBullet(gameObject);
+        Release();
 
     }
 }

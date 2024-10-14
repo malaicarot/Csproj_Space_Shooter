@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-
-public class Lazer_Shooter : MonoBehaviour
+[RequireComponent(typeof(PooledObject))]
+public class Lazer_Shooter : PooledObject
 {
     public GameObject lazerPrefabs;
 
@@ -86,15 +86,10 @@ public class Lazer_Shooter : MonoBehaviour
         }
         else
         {
-            // GameObject Bullet = Instantiate(lazerPrefabs, transform.position, Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)));
-            GameObject Bullet = BulletPool.SingleTonPulletPool.GetPolledBullet(transform.position, Quaternion.identity);
+            Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position);
             Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
             air_Shooting.ParentName = parentName;
-            Bullet.SetActive(true);
-
         }
-
-
     }
     public void ActiveBulletParallel(float duration)
     {
