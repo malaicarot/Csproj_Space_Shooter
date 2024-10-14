@@ -9,10 +9,9 @@ public class Air_Shooting : MonoBehaviour
 
     [SerializeField] GameObject ExplodePrefabs;
 
-
     public string ParentName { get; set; }
 
-    [SerializeField] private Vector3 direction;
+    private Vector3 direction;
 
     private ScoreManage scoreManager;
 
@@ -20,6 +19,12 @@ public class Air_Shooting : MonoBehaviour
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManage>();
+        if(ParentName == "Player"){
+            direction = new Vector3(0f, 1f, 0f);
+
+        }else{
+            direction = new Vector3(0f, -1f, 0f);
+        }
     }
 
     void Update()
@@ -40,6 +45,7 @@ public class Air_Shooting : MonoBehaviour
             {
                 ScoreManage.AddScore(1);
                 DestroyEnemy(other.gameObject);
+                
             }
             else if (other.CompareTag("Obstacle"))
             {
@@ -76,7 +82,8 @@ public class Air_Shooting : MonoBehaviour
         GameObject exploder = Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
         exploder.transform.localScale = other.gameObject.transform.localScale * 4;
         Destroy(other.gameObject);
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        BulletPool.SingleTonPulletPool.ReturnBullet(gameObject);
 
     }
 }

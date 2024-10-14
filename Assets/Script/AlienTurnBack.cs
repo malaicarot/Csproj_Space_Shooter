@@ -33,7 +33,7 @@ public class AlienTurnBack : MonoBehaviour
         }
         else
         {
-            // transform.Rotate(TurnBack);
+        
             transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
         }
     }
