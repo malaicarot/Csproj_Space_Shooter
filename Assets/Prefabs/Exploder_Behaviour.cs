@@ -9,7 +9,6 @@ public class Exploder_Behaviour : MonoBehaviour
     void Start(){
         boxCollider2D = GetComponent<BoxCollider2D>();
         UpdateColliderSize();
-        Debug.Log(boxCollider2D.size);
         StartCoroutine("DestroyExplode");
     }
     void UpdateColliderSize(){

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.Timeline;
 public class ObstacleScript : MonoBehaviour, IEnemy
 {
 
@@ -29,5 +30,8 @@ public class ObstacleScript : MonoBehaviour, IEnemy
     {
 
 
+    }
+    void Update(){
+Move();
     }
 }
