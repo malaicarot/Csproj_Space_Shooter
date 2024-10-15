@@ -55,38 +55,39 @@ public class Lazer_Shooter : PooledObject
 
         if (isBulletParallel)
         {
-            // Vector3 leftPosition = transform.position + new Vector3(-0.6f, 0, 0);
-            // Vector3 rightPosition = transform.position + new Vector3(0.6f, 0, 0);
+            Vector3 leftPosition = transform.position + new Vector3(-0.6f, 0, 0);
+            Vector3 rightPosition = transform.position + new Vector3(0.6f, 0, 0);
 
-            // GameObject BulletLeft = Instantiate(lazerPrefabs, leftPosition, Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)));
-            // Air_Shooting air_Shooting_Left = BulletLeft.GetComponent<Air_Shooting>();
-            // air_Shooting_Left.ParentName = parentName;
+            Air_Shooting BulletLeft = BulletPool.SingleTonPulletPool.GetBullet(leftPosition, Quaternion.identity);
+            Air_Shooting air_Shooting_Left = BulletLeft.GetComponent<Air_Shooting>();
+
+            air_Shooting_Left.ParentName = parentName;
 
 
-            // GameObject BulletRight = Instantiate(lazerPrefabs, rightPosition, Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)));
-            // Air_Shooting air_Shooting_Right = BulletRight.GetComponent<Air_Shooting>();
-            // air_Shooting_Right.ParentName = parentName;
+            Air_Shooting BulletRight = BulletPool.SingleTonPulletPool.GetBullet(rightPosition, Quaternion.identity);
+            Air_Shooting air_Shooting_Right = BulletRight.GetComponent<Air_Shooting>();
+            air_Shooting_Right.ParentName = parentName;
         }
         else if (isBulletCone)
         {
 
-            // float[] angles = { -25f, -15f, 0, 15f, 25f };
-            // foreach (float angle in angles)
-            // {
-            //     Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            float[] angles = { -25f, -15f, 0, 15f, 25f };
+            foreach (float angle in angles)
+            {
+                Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-            //     GameObject Bullet = Instantiate(lazerPrefabs, transform.position, rotation);
+                Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position, rotation);
 
-            //     Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
+                Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
 
-            //     air_Shooting.ParentName = parentName;
+                air_Shooting.ParentName = parentName;
 
-            // }
+            }
 
         }
         else
         {
-            Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position);
+            Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position, Quaternion.identity);
             Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
             air_Shooting.ParentName = parentName;
         }
