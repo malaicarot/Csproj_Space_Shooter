@@ -7,32 +7,27 @@ using UnityEngine;
 public class Lazer_Shooter : PooledObject
 {
     public GameObject lazerPrefabs;
-
     [SerializeField] private float timer;
     [SerializeField] private float shootInterval = 1.5f;
 
-    [SerializeField] private string parentName;
+    [SerializeField] public string parentName;
 
     [SerializeField] private AudioClip lazerSound;
 
-    private AudioSource audioSource;
-
     private bool isBulletParallel = false;
     private bool isBulletCone = false;
-
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+
 
     }
     void Update()
     {
-
         timer += Time.deltaTime;
         if (parentName == "Boss")
         {
             isBulletCone = true;
-        
+
         }
 
         if (timer >= shootInterval)
@@ -43,7 +38,8 @@ public class Lazer_Shooter : PooledObject
 
     }
 
-    public IEnumerator SpeedUpSpawnBullet(){
+    public IEnumerator SpeedUpSpawnBullet()
+    {
         shootInterval -= 0.5f;
         yield return new WaitForSeconds(3f);
         shootInterval += 0.5f;
@@ -51,7 +47,7 @@ public class Lazer_Shooter : PooledObject
     }
     void Shooting()
     {
-        audioSource.PlayOneShot(lazerSound);
+        SoundController._instance.ShootAudioPlay();
 
         if (isBulletParallel)
         {
@@ -92,6 +88,7 @@ public class Lazer_Shooter : PooledObject
             air_Shooting.ParentName = parentName;
         }
     }
+
     public void ActiveBulletParallel(float duration)
     {
         StartCoroutine(BulletParallelEffect(duration));
@@ -121,5 +118,7 @@ public class Lazer_Shooter : PooledObject
         isBulletCone = false;
 
     }
+
+
 
 }

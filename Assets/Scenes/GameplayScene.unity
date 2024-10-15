@@ -948,6 +948,7 @@ MonoBehaviour:
   - {fileID: 8006446210416567494, guid: b14197a938da8d34883c689c0a37ea49, type: 3}
   - {fileID: 6691629150162143810, guid: 61be1fa0cf3a6004787c2eeb425545ac, type: 3}
   - {fileID: 8006446210416567494, guid: 62789d867e1610c46895c021083a3a14, type: 3}
+  - {fileID: 8006446210416567494, guid: c78de862d435b204c86ba310e8add3f0, type: 3}
   rateDrop: 90
 --- !u!4 &613507466
 Transform:
@@ -1429,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc73a8e3559343f4b8c2e98ca77e6308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 10
   _ScoreManager: {fileID: 557049684}
   ExplodePrefabs: {fileID: 3489347772938492040, guid: 07258140a05e1ad4c87a89932add7b54, type: 3}
   maxHealth: 100

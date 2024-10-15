@@ -9,8 +9,6 @@ public class AirMover : MonoBehaviour
 
     public ScoreManage _ScoreManager;
     private Lazer_Shooter _BulletEffect;
-    private Air_Shooting __BulletEffect_2;
-
 
     [SerializeField] GameObject ExplodePrefabs;
     [SerializeField] int maxHealth = 100;
@@ -25,7 +23,6 @@ public class AirMover : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         _BulletEffect = FindObjectOfType<Lazer_Shooter>();
-        __BulletEffect_2 = FindObjectOfType<Air_Shooting>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         xMaxPosition = new Vector2(-8.3f, 8.3f);
@@ -34,6 +31,7 @@ public class AirMover : MonoBehaviour
 
     void Update()
     {
+
 
         if (_ScoreManager._gameState == gameState.gameOver)
         {
@@ -78,12 +76,6 @@ public class AirMover : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        AudioSource audioSource_PoweUp = GetComponent<AudioSource>();
-        // AudioSource audioSource_Destroy = other.GetComponent<AudioSource>();
-
-
-        
-
         if (other.CompareTag("Enemy") || other.CompareTag("Obstacle") || other.CompareTag("Boss") || other.CompareTag("Exploder"))
         {
             if (gameObject.CompareTag("Player"))
@@ -91,7 +83,6 @@ public class AirMover : MonoBehaviour
                 takeDamage(100);
                 _ScoreManager.GameOver();
                 Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
-                Debug.Log(other.gameObject);
                 Destroy(gameObject);
             }
         }
@@ -100,23 +91,27 @@ public class AirMover : MonoBehaviour
         {
             Healing(30);
             Destroy(other.gameObject);
-            audioSource_PoweUp.Play();
+            SoundController._instance.PowerUpAudioPlay();
+
         }
         else if (other.CompareTag("Item_BulletCone"))
         {
             _BulletEffect.ActiveBulletCone(10f);
             Destroy(other.gameObject);
-            audioSource_PoweUp.Play();
+            SoundController._instance.PowerUpAudioPlay();
         }
         else if (other.CompareTag("Item_BulletParallel"))
         {
             _BulletEffect.ActiveBulletParallel(10f);
             Destroy(other.gameObject);
-            audioSource_PoweUp.Play();
-        }else if(other.CompareTag("Item_RateOfFire")){
+            SoundController._instance.PowerUpAudioPlay();
+
+        }
+        else if (other.CompareTag("Item_RateOfFire"))
+        {
             StartCoroutine(_BulletEffect.SpeedUpSpawnBullet());
             Destroy(other.gameObject);
-            audioSource_PoweUp.Play();
+            SoundController._instance.PowerUpAudioPlay();
         }
     }
 }

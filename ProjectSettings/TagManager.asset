@@ -15,6 +15,7 @@ TagManager:
   - Boss
   - Item_RateOfFire
   - Exploder
+  - Item_BulletBallistic
   layers:
   - Default
   - TransparentFX

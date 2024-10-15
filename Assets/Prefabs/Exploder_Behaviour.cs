@@ -19,8 +19,7 @@ public class Exploder_Behaviour : MonoBehaviour
     }
 
    IEnumerator DestroyExplode(){
-    AudioSource audioSource = GetComponent<AudioSource>();
-    audioSource.Play();
+    SoundController._instance.ExplodeAudioPlay();
     yield return new WaitForSeconds(1);
     Destroy(gameObject);
 

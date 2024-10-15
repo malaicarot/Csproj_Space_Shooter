@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
 [RequireComponent(typeof(PooledObject))]
 public class Air_Shooting : PooledObject
 {
-    [SerializeField] private float speed = 7f;
 
+    [SerializeField] public float speed = 7f;
 
     [SerializeField] GameObject ExplodePrefabs;
 
@@ -17,23 +19,24 @@ public class Air_Shooting : PooledObject
 
     private ScoreManage scoreManager;
 
-
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManage>();
-        if(ParentName == "Player"){
+        if (ParentName == "Player")
+        {
             direction = new Vector3(0f, 1f, 0f);
-
-        }else{
+        }
+        else
+        {
             direction = new Vector3(0f, -1f, 0f);
         }
     }
 
     void Update()
-    {
+    {        
         transform.Translate(direction * speed * Time.deltaTime);
-
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -47,7 +50,7 @@ public class Air_Shooting : PooledObject
             {
                 ScoreManage.AddScore(1);
                 DestroyEnemy(other.gameObject);
-                
+
             }
             else if (other.CompareTag("Obstacle"))
             {
@@ -84,7 +87,6 @@ public class Air_Shooting : PooledObject
         GameObject exploder = Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
         exploder.transform.localScale = other.gameObject.transform.localScale * 4;
         Destroy(other.gameObject);
-        // BulletPool.SingleTonPulletPool.ReturnBullet(gameObject);
         Release();
 
     }

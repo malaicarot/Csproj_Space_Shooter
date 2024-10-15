@@ -7,7 +7,6 @@ public class BulletPool : ObjectPool
 {
 
     public static BulletPool SingleTonPulletPool;
-
     void Awake(){
         SingleTonPulletPool = this;
     }
@@ -19,5 +18,11 @@ public class BulletPool : ObjectPool
         Bullet.transform.rotation = quaternion;
         return Bullet;
     }
+
+
+
+
+
+
  
 }
