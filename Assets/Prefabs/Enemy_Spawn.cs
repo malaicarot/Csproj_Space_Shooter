@@ -114,7 +114,6 @@ public class Enemy_Spawn : PooledObject
                         yield return new WaitForSeconds(spawnItems);
                     }
                 }
-
                 yield return new WaitForSeconds(spwawnWait);
             }
 

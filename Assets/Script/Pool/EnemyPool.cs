@@ -9,7 +9,7 @@ public class EnemyPool : ObjectPool
         SingleTonEnemyPool = this;
     }
 
-     public EnemyFactory CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
+    public EnemyFactory CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion quaternion)
     {
         PooledObject objOfPool = GetPooledObject(enemyType.ToString());
         EnemyFactory Enemy = objOfPool.GetComponent<EnemyFactory>();
