@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 1030142488592540937}
   - component: {fileID: -147586139554714830}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: BossShip
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

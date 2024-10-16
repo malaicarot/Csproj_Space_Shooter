@@ -56,6 +56,7 @@ public class Enemy_Spawn : PooledObject
     public void Spawner(EnemyType enemyType)
     {
         Vector3 enemySpawner;
+        EnemyFactory enemy;
         float randomX = Random.Range(-8.2f, 8.2f);
         if (enemyType == EnemyType.BossShip)
         {
@@ -64,13 +65,15 @@ public class Enemy_Spawn : PooledObject
         else if (enemyType == EnemyType.EnemyGreen)
         {
             enemySpawner = new Vector3(spacing, 4.8f, 0f);
+        
+            // enemy = EnemyPool.SingleTonEnemyPool.CreateEnemy(enemyType, enemySpawner, Quaternion.identity);
         }
         else
         {
             enemySpawner = new Vector3(randomX, 8f, 0f);
         }
 
-        EnemyFactory enemy = EnemyPool.SingleTonEnemyPool.CreateEnemy(enemyType, enemySpawner, Quaternion.identity);
+        enemy = EnemyPool.SingleTonEnemyPool.CreateEnemy(enemyType, enemySpawner, Quaternion.identity);
 
         if (enemyType != EnemyType.BossShip)
         {
