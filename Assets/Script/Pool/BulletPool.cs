@@ -11,9 +11,9 @@ public class BulletPool : ObjectPool
         SingleTonPulletPool = this;
     }
 
-    public Air_Shooting GetBullet(Vector3 position, Quaternion quaternion){
-        PooledObject p = SingleTonPulletPool.GetPooledObject();
-        Air_Shooting Bullet = p.GetComponent<Air_Shooting>();
+    public Air_Shooting GetBullet(string BulletType, Vector3 position, Quaternion quaternion){
+        PooledObject objOfPool = SingleTonPulletPool.GetPooledObject(BulletType);
+        Air_Shooting Bullet = objOfPool.GetComponent<Air_Shooting>();
         Bullet.transform.position = position;
         Bullet.transform.rotation = quaternion;
         return Bullet;

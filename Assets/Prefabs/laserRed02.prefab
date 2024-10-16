@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2600899717284926631}
   - component: {fileID: 3069765171347477687}
   - component: {fileID: -5739310942325039666}
-  - component: {fileID: 570858336156098229}
   m_Layer: 0
   m_Name: laserRed02
   m_TagString: Enemy_Lazer
@@ -174,18 +173,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   ExplodePrefabs: {fileID: 3489347772938492040, guid: 07258140a05e1ad4c87a89932add7b54, type: 3}
-  direction: {x: 0, y: -1, z: 0}
-  obstacleEndurance: 0
---- !u!114 &570858336156098229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5730402707075596266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f01bb776c2885e4eabbfa008ccda844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 2

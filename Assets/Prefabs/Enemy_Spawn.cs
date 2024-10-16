@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Spawn : MonoBehaviour
+
+[RequireComponent(typeof(PooledObject))]
+public class Enemy_Spawn : PooledObject
 {
     [SerializeField] private GameObject enemyLazerPrefabs;
     [SerializeField] private GameObject Obstacle;
+    
 
 
-    private List<GameObject> ListEnemyExits = new List<GameObject>();
+    private List<EnemyFactory> ListEnemyExits = new List<EnemyFactory>();
     private ScoreManage scoreManager;
 
     private PowerUp_Spawner powerUp_Items;
@@ -18,7 +21,7 @@ public class Enemy_Spawn : MonoBehaviour
     [SerializeField] private float startWait = 1f; // Thoi gian cho khi bat dau game
     [SerializeField] private float waitWave = 3f; // thoi gian doi giua cac wave
 
-    [SerializeField] EnemyFactory EnemFactory;
+    // [SerializeField] EnemyFactory EnemFactory;
 
     [SerializeField] private int wave = 3; // So luong wave trong game
     private int waveCount = 1;
@@ -39,6 +42,8 @@ public class Enemy_Spawn : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManage>();
         powerUp_Items = FindObjectOfType<PowerUp_Spawner>();
         StartCoroutine(EnemySpawner());
+        
+        
     }
 
 
@@ -56,7 +61,7 @@ public class Enemy_Spawn : MonoBehaviour
         {
             enemySpawner = new Vector3(0f, 8f, 0f);
         }
-        else if (enemyType == EnemyType.AlienShipHorizontal)
+        else if (enemyType == EnemyType.EnemyGreen)
         {
             enemySpawner = new Vector3(spacing, 4.8f, 0f);
         }
@@ -65,7 +70,7 @@ public class Enemy_Spawn : MonoBehaviour
             enemySpawner = new Vector3(randomX, 8f, 0f);
         }
 
-        GameObject enemy = EnemFactory.CreateEnemy(enemyType, enemySpawner);
+        EnemyFactory enemy = EnemyPool.SingleTonEnemyPool.CreateEnemy(enemyType, enemySpawner, Quaternion.identity);
 
         if (enemyType != EnemyType.BossShip)
         {
@@ -83,21 +88,21 @@ public class Enemy_Spawn : MonoBehaviour
             for (int i = 1; i <= hazardCount; i++)
             {
                 if(waveCount <= 1){
-                    Spawner(EnemyType.AlienShip);
+                    Spawner(EnemyType.EnemyBlue);
 
                 }
                 powerUp_Items.ItemDropRate();
                 if (waveCount >= 2)
                 {
-                    Spawner(EnemyType.AlienTurnBack);
+                    Spawner(EnemyType.EnemyGray);
                     Spawner(EnemyType.Obstacle);
                     if(waveCount >= 3){
-                        Spawner(EnemyType.AlienSelfDestruct);
+                        Spawner(EnemyType.EnemyRed);
 
                     }
                     for (int j = 0; j < enemyHorizontal; j++)
                     {
-                        Spawner(EnemyType.AlienShipHorizontal);
+                        Spawner(EnemyType.EnemyGreen);
                     }
                 }
                 if (waveCount == wave && i == hazardCount)

@@ -5,11 +5,15 @@ using UnityEngine;
 public class PooledObject : MonoBehaviour
 {
     private ObjectPool pool;
-    public ObjectPool _pool {get => pool; set => pool = value;}
+    public ObjectPool _pool { get => pool; set => pool = value; }
 
 
-    public void Release(){
-        pool.ReturnToPool(this);
+    public void Release()
+    {
+        if (_pool != null)
+        {
+            _pool.ReturnToPool(this);
+        }
     }
-   
+
 }

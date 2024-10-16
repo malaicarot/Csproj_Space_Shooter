@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6385652364704149604}
   - component: {fileID: -8936996810185076137}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: EnemyGray
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2452317365111522900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f01bb776c2885e4eabbfa008ccda844, type: 3}
   m_Name: 
@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef280648b80ea04a88003a9b9f8bde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazerPrefabs: {fileID: 5730402707075596266, guid: 4bd6e3f1fd423cd4ebdecbb98ae151ed, type: 3}
   timer: 0
   shootInterval: 1.5
   parentName: Enemy

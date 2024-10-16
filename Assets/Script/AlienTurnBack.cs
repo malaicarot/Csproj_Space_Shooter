@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class AlienTurnBack : MonoBehaviour
+public class AlienTurnBack : EnemyFactory, IEnemy
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;

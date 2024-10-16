@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossScript : MonoBehaviour, IEnemy
+public class BossScript : EnemyFactory, IEnemy
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;

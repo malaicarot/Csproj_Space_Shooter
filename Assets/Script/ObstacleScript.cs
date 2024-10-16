@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
-public class ObstacleScript : MonoBehaviour, IEnemy
+public class ObstacleScript : EnemyFactory, IEnemy
 {
 
     [SerializeField] private float _moveSpeed;

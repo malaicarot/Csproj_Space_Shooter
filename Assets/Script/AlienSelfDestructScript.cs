@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlienSelfDestructScript : MonoBehaviour
+public class AlienSelfDestructScript : EnemyFactory, IEnemy
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;
     [SerializeField] private int _health;
 
     [SerializeField] GameObject ExplodePrefabs;
-    // [SerializeField] BoxCollider2D boxCollider2D;
 
     public int health {get => _health; set => _health = value;}
     public int damage { get => _damage; set => _damage = value; }
     public float moveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
-
-    void Start(){
-        // boxCollider2D = GetComponent<BoxCollider2D>();
-    }
 
 
     public void Move()

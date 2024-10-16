@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+public enum BulletType{
+    Basic,
+    Enemy,
+    Boss
+
+}
 [RequireComponent(typeof(PooledObject))]
+
 public class Lazer_Shooter : PooledObject
 {
-    public GameObject lazerPrefabs;
+    // public GameObject lazerPrefabs;
     [SerializeField] private float timer;
     [SerializeField] private float shootInterval = 1.5f;
 
@@ -54,13 +61,13 @@ public class Lazer_Shooter : PooledObject
             Vector3 leftPosition = transform.position + new Vector3(-0.6f, 0, 0);
             Vector3 rightPosition = transform.position + new Vector3(0.6f, 0, 0);
 
-            Air_Shooting BulletLeft = BulletPool.SingleTonPulletPool.GetBullet(leftPosition, Quaternion.identity);
+            Air_Shooting BulletLeft = BulletPool.SingleTonPulletPool.GetBullet(BulletType.Basic.ToString(), leftPosition, Quaternion.identity);
             Air_Shooting air_Shooting_Left = BulletLeft.GetComponent<Air_Shooting>();
 
             air_Shooting_Left.ParentName = parentName;
 
 
-            Air_Shooting BulletRight = BulletPool.SingleTonPulletPool.GetBullet(rightPosition, Quaternion.identity);
+            Air_Shooting BulletRight = BulletPool.SingleTonPulletPool.GetBullet(BulletType.Basic.ToString(), rightPosition, Quaternion.identity);
             Air_Shooting air_Shooting_Right = BulletRight.GetComponent<Air_Shooting>();
             air_Shooting_Right.ParentName = parentName;
         }
@@ -72,7 +79,7 @@ public class Lazer_Shooter : PooledObject
             {
                 Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-                Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position, rotation);
+                Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(BulletType.Basic.ToString(), transform.position, rotation);
 
                 Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
 
@@ -83,7 +90,7 @@ public class Lazer_Shooter : PooledObject
         }
         else
         {
-            Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(transform.position, Quaternion.identity);
+            Air_Shooting Bullet = BulletPool.SingleTonPulletPool.GetBullet(BulletType.Basic.ToString(), transform.position, Quaternion.identity);
             Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
             air_Shooting.ParentName = parentName;
         }

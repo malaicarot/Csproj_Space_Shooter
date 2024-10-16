@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlienScript : MonoBehaviour, IEnemy
+public class AlienScript : EnemyFactory, IEnemy
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;

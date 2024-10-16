@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 8143577590873591948}
   - component: {fileID: 9173950674767739687}
   - component: {fileID: -5551736149258938895}
-  - component: {fileID: 6104223295563250862}
   m_Layer: 0
-  m_Name: laserRed03
+  m_Name: Basic
   m_TagString: Lazer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,16 +173,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   ExplodePrefabs: {fileID: 3489347772938492040, guid: 07258140a05e1ad4c87a89932add7b54, type: 3}
---- !u!114 &6104223295563250862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5301508831413037688}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f01bb776c2885e4eabbfa008ccda844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 2

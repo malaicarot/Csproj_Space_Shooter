@@ -5,56 +5,69 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Pool;
 
+
+
 public class ObjectPool : MonoBehaviour
 {
 
 
-    [Range(10, 100)] [SerializeField] private int poolSize;
-    [SerializeField] private PooledObject objectToPool;
-    private Stack<PooledObject> PoolStack;
+    [Range(10, 100)][SerializeField] private int poolSize;
+    [SerializeField] private List<PooledObject> objectToPool;
+    private Dictionary<string, Stack<PooledObject>> poolDictionary;
 
-    void Start(){
+    void Start()
+    {
         SetUpPool();
     }
 
-    void SetUpPool(){
-        if(objectToPool == null){
+    void SetUpPool()
+    {
+        if (objectToPool == null || objectToPool.Count == 0)
+        {
             return;
         }
-        PoolStack = new Stack<PooledObject>();
-        PooledObject instance;
-
-        for(int i = 0; i < poolSize; i++){
-            instance = Instantiate(objectToPool);
-            instance._pool = this;
-            instance.gameObject.SetActive(false);
-            PoolStack.Push(instance);
+        poolDictionary = new Dictionary<string, Stack<PooledObject>>();
+        foreach (var obj in objectToPool)
+        {
+            Stack<PooledObject> objStack = new Stack<PooledObject>();
+            for (int i = 0; i < poolSize; i++)
+            {
+                PooledObject instance = Instantiate(obj);
+                instance._pool = this;
+                instance.gameObject.SetActive(false);
+                objStack.Push(instance);
+            }
+            poolDictionary.Add(obj.name, objStack);
         }
+
+
     }
 
-    public PooledObject GetPooledObject(){
-        if(objectToPool == null){
+    public PooledObject GetPooledObject(string objType)
+    {
+        if (string.IsNullOrEmpty(objType) || !poolDictionary.ContainsKey(objType))
+        {
             return null;
         }
-        if(PoolStack.Count == 0){
-            PooledObject newInstance = Instantiate(objectToPool);
+        if (poolDictionary[objType].Count == 0)
+        {
+            PooledObject newInstance = Instantiate(objectToPool.Find(obj => obj.name == objType));
             newInstance._pool = this;
             return newInstance;
         }
 
-        PooledObject nextInstance = PoolStack.Pop();
+        PooledObject nextInstance = poolDictionary[objType].Pop();
         nextInstance.gameObject.SetActive(true);
         return nextInstance;
     }
 
-    public void ReturnToPool(PooledObject pooledObject){
-        PoolStack.Push(pooledObject);
+    public void ReturnToPool(PooledObject pooledObject)
+    {
+        if(!poolDictionary.ContainsKey(pooledObject.name)){
+            Debug.Log(pooledObject);
+            Destroy(pooledObject.gameObject);
+        }
+        poolDictionary[pooledObject.name].Push(pooledObject);
         pooledObject.gameObject.SetActive(false);
-
     }
-
-
-    
-
-    
 }
