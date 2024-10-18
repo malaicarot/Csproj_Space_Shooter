@@ -22,7 +22,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
             else
             {
                 string typeName = typeof(T).Name;
-                Debug.Log($"Singleton {typeName} already created!");
+                // Debug.Log($"Singleton {typeName} already created!");
             }
             return instance;
 

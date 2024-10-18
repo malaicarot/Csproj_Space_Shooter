@@ -15,5 +15,4 @@ public class PooledObject : MonoBehaviour
             _pool.ReturnToPool(this);
         }
     }
-
 }

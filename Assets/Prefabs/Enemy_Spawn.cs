@@ -9,8 +9,6 @@ public class Enemy_Spawn : PooledObject
     [SerializeField] private GameObject enemyLazerPrefabs;
     [SerializeField] private GameObject Obstacle;
     
-
-
     private List<EnemyFactory> ListEnemyExits = new List<EnemyFactory>();
     private ScoreManage scoreManager;
 
@@ -45,7 +43,6 @@ public class Enemy_Spawn : PooledObject
         
         
     }
-
 
     void Update()
     {

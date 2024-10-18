@@ -22,6 +22,5 @@ public class Exploder_Behaviour : MonoBehaviour
     SoundController._instance.ExplodeAudioPlay();
     yield return new WaitForSeconds(1);
     Destroy(gameObject);
-
    }
 }

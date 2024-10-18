@@ -18,11 +18,4 @@ public class BulletPool : ObjectPool
         Bullet.transform.rotation = quaternion;
         return Bullet;
     }
-
-
-
-
-
-
- 
 }

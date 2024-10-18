@@ -16,6 +16,7 @@ TagManager:
   - Item_RateOfFire
   - Exploder
   - Item_BulletBallistic
+  - Boundary
   layers:
   - Default
   - TransparentFX

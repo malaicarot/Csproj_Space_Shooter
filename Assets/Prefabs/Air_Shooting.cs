@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -28,12 +29,13 @@ public class Air_Shooting : PooledObject
         }
         else
         {
-            direction = new Vector3(0f, -1f, 0f);
+            direction = Vector3.down;
         }
+
     }
 
     void Update()
-    {        
+    {
         transform.Translate(direction * speed * Time.deltaTime);
     }
 
@@ -63,22 +65,32 @@ public class Air_Shooting : PooledObject
                     DestroyEnemy(other.gameObject);
                     scoreManager.GameOver();
                 }
-                Destroy(gameObject);
+                Release();
                 boss.TakeDamage(10);
-
             }
+            // else if (other.CompareTag("Boundary"))
+            // {
+            //     Release();
+            // }
+
         }
-        if ((ParentName == "Enemy" || ParentName == "Boss") && other.CompareTag("Player"))
+        if (ParentName == "Enemy" || ParentName == "Boss")
         {
 
-            if (player.currentHealth == 0)
+            if (other.CompareTag("Player"))
             {
-                DestroyEnemy(other.gameObject);
-                scoreManager.GameOver();
+                if (player.currentHealth == 0)
+                {
+                    DestroyEnemy(other.gameObject);
+                    scoreManager.GameOver();
+                }
+                player.takeDamage(20);
+                Release();
             }
-            player.takeDamage(20);
-            Destroy(gameObject);
-
+            // else if (other.CompareTag("Boundary"))
+            // {
+            //     Release();
+            // }
         }
     }
 
@@ -86,8 +98,8 @@ public class Air_Shooting : PooledObject
     {
         GameObject exploder = Instantiate(ExplodePrefabs, transform.position, Quaternion.identity);
         exploder.transform.localScale = other.gameObject.transform.localScale * 4;
-        Destroy(other.gameObject);
-        Release();
+        EnemyFactory returnToPool = other.gameObject.GetComponent<EnemyFactory>();
+        returnToPool.ReturnToPool();
 
     }
 }

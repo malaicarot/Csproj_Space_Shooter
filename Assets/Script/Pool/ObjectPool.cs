@@ -34,6 +34,7 @@ public class ObjectPool : MonoBehaviour
             {
                 PooledObject instance = Instantiate(obj);
                 instance._pool = this;
+                instance.gameObject.name = obj.name;
                 instance.gameObject.SetActive(false);
                 objStack.Push(instance);
             }
@@ -47,27 +48,41 @@ public class ObjectPool : MonoBehaviour
     {
         if (string.IsNullOrEmpty(objType) || !poolDictionary.ContainsKey(objType))
         {
+            Debug.Log($"Don't find OBJ type {objType}");
             return null;
         }
         if (poolDictionary[objType].Count == 0)
         {
             PooledObject newInstance = Instantiate(objectToPool.Find(obj => obj.name == objType));
+            newInstance.gameObject.name = objType; // dat lai ten
             newInstance._pool = this;
             return newInstance;
         }
 
         PooledObject nextInstance = poolDictionary[objType].Pop();
+        
         nextInstance.gameObject.SetActive(true);
         return nextInstance;
     }
 
     public void ReturnToPool(PooledObject pooledObject)
     {
-        if(!poolDictionary.ContainsKey(pooledObject.name)){
-            Debug.Log(pooledObject);
+        Debug.Log($"Return {pooledObject.name} to pool");
+        if (!poolDictionary.ContainsKey(pooledObject.name))
+        {
+            Debug.Log(pooledObject.name);
+            foreach(var item in poolDictionary){
+                Debug.Log($"===> pool dictionary item: {item.Key}");
+            }
             Destroy(pooledObject.gameObject);
         }
-        poolDictionary[pooledObject.name].Push(pooledObject);
-        pooledObject.gameObject.SetActive(false);
+        else
+        {
+            poolDictionary[pooledObject.name].Push(pooledObject);
+
+            pooledObject.gameObject.SetActive(false);
+            Debug.Log($"Pool Obj activeInHierarchy: {pooledObject.gameObject.activeInHierarchy}");
+        }
+
     }
 }

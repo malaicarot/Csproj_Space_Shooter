@@ -84,9 +84,7 @@ public class Lazer_Shooter : PooledObject
                 Air_Shooting air_Shooting = Bullet.GetComponent<Air_Shooting>();
 
                 air_Shooting.ParentName = parentName;
-
             }
-
         }
         else
         {
@@ -123,9 +121,5 @@ public class Lazer_Shooter : PooledObject
         yield return new WaitForSeconds(duration);
 
         isBulletCone = false;
-
     }
-
-
-
 }

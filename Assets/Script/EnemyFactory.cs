@@ -1,16 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// public enum EnemyType
-// {
-//     Obstacle,
-//     AlienShip,
-//     AlienShipHorizontal,
-//     AlienSelfDestruct,
-//     AlienTurnBack,
-//     BossShip
-// }
 public enum EnemyType
 {
     Obstacle,
@@ -36,6 +26,23 @@ public interface IEnemy
 [RequireComponent(typeof(PooledObject))]
 public class EnemyFactory : PooledObject
 {
+    // public static EnemyFactory Instance;
+
+    // void Awake()
+    // {
+    //     if (Instance == null)
+    //     {
+    //         Instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+    public void ReturnToPool(){
+        Release();
+    }
 
 
 }
